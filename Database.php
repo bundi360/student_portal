@@ -7,14 +7,10 @@ function connect($server, $user, $password, $db_name)
         $user,
         $password
     );
+
+    
     $sql = "CREATE DATABASE IF NOT EXISTS student_portal";
-    if ($db->query($sql) === true) {
-        $db = new mysqli(
-            $server,
-            $user,
-            $password,
-            $db_name
-        );}
+    $db->query($sql);    
 
    $sql1 = "CREATE TABLE IF NOT EXISTS student_details (ID int(11) AUTO_INCREMENT,
 `name` varchar(255) NOT NULL,
@@ -54,6 +50,10 @@ if($db->query($sql4)===true){
 
 
 
+
+}
+
+function xiv(mysqli $db){
 
 }
 
