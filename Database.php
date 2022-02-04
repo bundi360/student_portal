@@ -7,21 +7,18 @@ function connect($server, $user, $password, $db_name)
         $password
     );
 
-
+    
     $sql = "CREATE DATABASE IF NOT EXISTS student_portal";
+    $db->query($sql);    
+ if($db->query($sql)){
+    $db = new mysqli(
+        $server,
+        $user,
+        $password,
+        $db_name
+    );
 
-    if ($db->query($sql) === true) {
-        $db = new mysqli(
-            $server,
-            $user,
-            $password,
-            $db_name
-        );
-      //  echo "database created\n";
-    } else {
-      //  echo "could not create\n";
-    }
-
+ }
 
 
     $sql1 = "CREATE TABLE IF NOT EXISTS student_details (ID int(11) AUTO_INCREMENT, 
@@ -86,17 +83,17 @@ function inserIntoCourses(mysqli $db)
     $db->query($sql);
 }
 
-function displayUnits(mysqli $db){
-    $data = [];
-    $sql = "SELECT DISTINCT course_code,course_name FROM course_details ORDER BY course_code";
-    $resultSet = $db->query($sql);
+ function displayUnits(mysqli $db){
+     $data = [];
+     $sql = "SELECT DISTINCT course_code,course_name FROM course_details ORDER BY course_code";
+     $resultset = $db->query($sql);
 
-    while($row = $resultSet->fetch_assoc()){
-        $data[]=$row;
-    }
-    return $data;
-}
+     while($row = $resultset->fetch_assoc()){
+$data[]=$row;
+     }
+     return $data;
 
+ }
 function insertToStudents(mysqli $db, array $record)
 {
     $sql = "INSERT INTO student_details(`name`,`adm_number`,`sem`) VALUES('$record[0]','$record[1]','$record[2]')";
