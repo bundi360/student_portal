@@ -7,18 +7,17 @@ function connect($server, $user, $password, $db_name)
         $password
     );
 
-    
-    $sql = "CREATE DATABASE IF NOT EXISTS student_portal";
-    $db->query($sql);    
- if($db->query($sql)){
-    $db = new mysqli(
-        $server,
-        $user,
-        $password,
-        $db_name
-    );
 
- }
+    $sql = "CREATE DATABASE IF NOT EXISTS student_portal";
+    $db->query($sql);
+    if ($db->query($sql)) {
+        $db = new mysqli(
+            $server,
+            $user,
+            $password,
+            $db_name
+        );
+    }
 
 
     $sql1 = "CREATE TABLE IF NOT EXISTS student_details (ID int(11) AUTO_INCREMENT, 
@@ -28,16 +27,16 @@ function connect($server, $user, $password, $db_name)
     PRIMARY KEY  (ID))";
 
     if ($db->query($sql1)) {
-       // echo "created  successfully";
+        // echo "created  successfully";
     } else {
-      //  echo "could not create" . mysqli_error($db);
+        //  echo "could not create" . mysqli_error($db);
     }
     $sql2 = "CREATE TABLE IF NOT EXISTS course_details (ID int(11) AUTO_INCREMENT,
 `course_code` varchar(255) NOT NULL,
 course_name varchar(255) NOT NULL,
 PRIMARY KEY  (ID))";
     if ($db->query($sql2) === true) {
-       // echo "created 2 successfully";
+        // echo "created 2 successfully";
     }
 
 
@@ -47,7 +46,7 @@ PRIMARY KEY  (ID))";
 result int (20) NOT NULL)";
 
     if ($db->query($sql3) === true) {
-       // echo "created 3 successfully";
+        // echo "created 3 successfully";
     }
 
 
@@ -67,33 +66,33 @@ FOREIGN KEY (student_id) REFERENCES student_details(id))";
 
 function inserIntoCourses(mysqli $db)
 {
-    $sql = "INSERT  INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs 301','Database Admin')";
+    $sql = "INSERT  INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs301','Database Admin')";
     $db->query($sql);
-    $sql = "INSERT  INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs 303','principles of programming language')";
+    $sql = "INSERT  INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs303','principles of programming language')";
     $db->query($sql);
-    $sql = "INSERT  INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs 305','Compiler Design')";
+    $sql = "INSERT  INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs305','Compiler Design')";
     $db->query($sql);
-    $sql = "INSERT   INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs 307','Design of algos')";
+    $sql = "INSERT   INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs307','Design of algos')";
     $db->query($sql);
-    $sql = "INSERT INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs 309','group project')";
+    $sql = "INSERT INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs309','group project')";
     $db->query($sql);
-    $sql = "INSERT INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs 311','name')";
+    $sql = "INSERT INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs311','name')";
     $db->query($sql);
-    $sql = "INSERT INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs 315','Intelligent systems')";
+    $sql = "INSERT INTO `course_details`(`course_code`, `course_name`) VALUES ('ccs315','Intelligent systems')";
     $db->query($sql);
 }
 
- function displayUnits(mysqli $db){
-     $data = [];
-     $sql = "SELECT DISTINCT course_code,course_name FROM course_details ORDER BY course_code";
-     $resultset = $db->query($sql);
+function displayUnits(mysqli $db)
+{
+    $data = [];
+    $sql = "SELECT DISTINCT course_code,course_name FROM course_details ORDER BY course_code";
+    $resultset = $db->query($sql);
 
-     while($row = $resultset->fetch_assoc()){
-$data[]=$row;
-     }
-     return $data;
-
- }
+    while ($row = $resultset->fetch_assoc()) {
+        $data[] = $row;
+    }
+    return $data;
+}
 function insertToStudents(mysqli $db, array $record)
 {
     $sql = "INSERT INTO student_details(`name`,`adm_number`,`sem`) VALUES('$record[0]','$record[1]','$record[2]')";
@@ -104,4 +103,26 @@ function insertToStudents(mysqli $db, array $record)
     } else {
         echo "failed";
     }
+}
+
+function insertRegisterdUnits(mysqli $db, $std_id, $cors_id)
+{
+    $sql = "INSERT INTO student_course (course_id,student_id) VALUES('$std_id','$cors_id')";
+    $db->query($sql);
+}
+
+function selectStudentId(mysqli $db,$std_adm)
+{
+$id = [];
+    $sql = "SELECT ID FROM student_details WHERE `adm_number` = '$std_adm'";
+    $resultset =  $db->query($sql);
+
+    while($row = $resultset->fetch_assoc()){
+$id[]=$row;
+    }
+
+    return $id;
+}
+function getCourseCode(mysqli $db){
+    
 }
