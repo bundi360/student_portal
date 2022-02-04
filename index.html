@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REGISTRATION</title>
     <div><h1>SEMESTER REGISTRATION</h1></div><br>
@@ -10,7 +9,9 @@
 
 
 <body>
-    <form action = "" method="post">
+  
+    
+    <form action = "register.php" method="post">
  
 
 <div><b>Name:</b> <input type ="text" name ="name"> <br></div>
@@ -24,15 +25,13 @@
     <label for="semester">Y3S1</label><br>
 </div> 
     <div>
-        <input type="radio" id="semester" name="current_semester" value="Y3S2">
+        
+        <input  type="radio" id="semester" name="current_semester" value="Y3S2">
         <label for="semester">Y3S2</label><br>
         </div>
         <br>
-        <button ><a href="./register.html">Register</a> </button>
+        <button name="btn_register">Register</button>
 
 </form>
-
-
-    
 </body>
 </html>
