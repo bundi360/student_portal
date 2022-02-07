@@ -28,11 +28,12 @@
                   <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">MASENO UNIVERSITY REGISTRATION</p>
   
                   
-     
+                  <label for="error" id="error" class="bg-danger" style="visibility: hidden;">Please enter valid credentials!!</label>
+                  <br><br>
     <div class="d-flex flex-row align-items-center mb-4">
       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
       <div class="form-outline flex-fill mb-0">
-        <input type="text" id="form3Example1c" name="name" class="form-control" />
+        <input type="text" id="name" name="name" class="form-control" />
         <label class="form-label" for="form3Example1c">Name</label>
       </div>
     </div>
@@ -40,7 +41,7 @@
     <div class="d-flex flex-row align-items-center mb-4">
         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
         <div class="form-outline flex-fill mb-0">
-          <input type="text" id="form3Example3c"  name="admissionNo" class="form-control" />
+          <input type="text" id="admissionNo"  name="admissionNo" class="form-control" />
           <label class="form-label"   for="form3Example3c">Adm NO</label>
         </div>
       </div>
@@ -48,20 +49,20 @@
       <div class="d-flex flex-row align-items-center mb-4">
         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
         <div class="form-outline flex-fill mb-0">
-            <input type="radio" class="form-check-input" id="radio1" name="current_semester"  value="Y3S1" checked> Y3S1
+            <input type="radio" class="form-check-input" id="year3_1" name="current_semester"  value="Y3S1" checked> Y3S1
             <label class="form-check-label" for="radio1"></label>
         </div>
       </div>
       <div class="d-flex flex-row align-items-center mb-4">
         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
         <div class="form-outline flex-fill mb-0">
-            <input type="radio" class="form-check-input" id="radio2" name="current_semester" value="Y3S2"> Y3S2
+            <input type="radio" class="form-check-input" id="year3_2" name="current_semester" value="Y3S2"> Y3S2
             <label class="form-check-label" for="radio2"></label>
         </div>
       </div>
 
       <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-        <button type="submit" name="btn_register" class="btn btn-primary btn-lg">Register</button>
+        <button onclick="return validate()" type="submit" name="btn_register" class="btn btn-primary btn-lg">Register</button>
       </div>
      </div>
     </div> 
@@ -75,6 +76,40 @@
 </div>
 </div>
 </form>
+
+
+<script>
+  function validate() {
+    var name = document.getElementById("name").value;
+    var admissionNo = document.getElementById("admissionNo").value;
+    var error_message = document.getElementById("error");
+
+  if(name.length == "") {
+    alert("Name cannot be empty!");
+
+    error_message.style.visibility = "visible";
+    return false;
+  }
+  else if(admissionNo.length == "") {
+    alert("Please enter your admission number");
+    
+    error_message.style.visibility = "visible";
+    return false;
+  }
+  else if(admissionNo.trim().length<11) {
+    alert("Admission number too short!!")
+
+    error_message.style.visibility = "visible";
+    return false;
+  }
+  else{
+    return true;
+  }
+    
+  }
+  
+
+</script>
        
        
 
