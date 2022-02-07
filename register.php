@@ -14,7 +14,7 @@ $values = array($_SESSION['name'], $_SESSION['adm_number'], $_SESSION['sem']);
 
 //inserting into student_details table
 if (isset($_POST['btn_register'])) {
-
+    
     insertToStudents($db, $values);
 }
 echo "<h2> Select the units you wish to register </h2>";
@@ -35,14 +35,14 @@ echo "<h2> Select the units you wish to register </h2>";
     foreach ($data  as $val) {
     ?>
 
-        <form>
-            <input type='checkbox' name='check'><?php echo"". $val['course_code']. " ". $val['course_name']; ?>
+        <form method="post" action="success.php">
+            <input type='checkbox' name='check[]' value=<?php echo"".$val['course_code']?>><?php echo"". $val['course_code']. " ". $val['course_name'].'<br>'; ?>
 
 
-        </form>
+       
     <?php
     } ?>
-    <form method="POST" action="success.php">
+    
         <button name="btn_submit">SUBMIT</button>
     </form>
 </body>
