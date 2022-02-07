@@ -10,25 +10,21 @@
 </head>
 <body>
 
-    <div class="container align-content-center" >
-        <div class="row align-content-center">
-            <form class="row g-3">
-                <div class="col-md-4">
-                  <label for="validationServer01" class="form-label">Admission Number</label>
-                  <input type="text" class="form-control is-valid" id="admin" required>
-                  <div class="valid-feedback">
-                  </div>
-                </div>
-                <div class="col-12">
-                  <button class="btn btn-primary" type="submit">Submit </button>
-                </div>
-              </form>
-        
-        
+    <div class="container md text-justify content-center " >
+        <form action="results.php"method="post">
 
-        </div>
-        
-        
+            <div class="form-group">
+                <label for="usr">AdmissionNo:</label>
+                <input type="text" class="form-control" id="AdmNo" name="adm_no">
+              </div>
+              <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                <button type="submit" name="btn_register" class="btn btn-primary btn-lg">Button</button>
+              </div>
+
+
+        </form>
+    
+    
     
     
     

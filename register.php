@@ -1,23 +1,50 @@
 <?php
+
 require_once 'Database.php';
 require_once "config.php";
 $db = connect(DB_SERVER, USER, PASSWORD, DB_NAME);
-
 $data = displayUnits($db);
-$name = $_POST['name'];
-$adm_number = $_POST['admissionNo'];
-$sem = $_POST['current_semester'];
-$values = array($name, $adm_number, $sem);
-if (isset($_POST['btn_register'])) {
+session_start();
 
+
+$_SESSION['name'] = $_POST['name'];
+$_SESSION['adm_number'] = $_POST['admissionNo'];
+$_SESSION['sem'] = $_POST['current_semester'];
+$values = array($_SESSION['name'], $_SESSION['adm_number'], $_SESSION['sem']);
+
+//inserting into student_details table
+if (isset($_POST['btn_register'])) {
+    
     insertToStudents($db, $values);
 }
-
-foreach ($data  as $val) {
-    echo "<form>";
-    echo "<input type = 'checkbox' name = 'check'>" . $val['course_code'] . " " . $val['course_name'];
+echo "<h2> Select the units you wish to register </h2>";
 
 
-    echo "</form>";
-}
-echo "<button type='submit' name='sbt_units'>SUBMIT</button>";
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+    <?php
+   
+    foreach ($data  as $val) {
+    ?>
+
+        <form method="post" action="success.php">
+            <input type='checkbox' name='check[]' value=<?php echo"".$val['course_code']?>><?php echo"". $val['course_code']. " ". $val['course_name'].'<br>'; ?>
+
+
+       
+    <?php
+    } ?>
+    
+        <button name="btn_submit">SUBMIT</button>
+    </form>
+</body>
+
+</html>
